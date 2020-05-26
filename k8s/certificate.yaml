@@ -1,0 +1,20 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: gcloud-sqs-vn-tls
+spec:
+  secretName: gcloud-sqs-vn
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: gcloud.sqs.vn
+  dnsNames:
+    - gcloud.sqs.vn
+    - www.gcloud.sqs.vn
+  acme:
+    config:
+      - http01:
+          ingressClass: nginx
+        domains:
+          - gcloud.sqs.vn
+          - www.gcloud.sqs.vn
